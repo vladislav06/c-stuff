@@ -2,23 +2,24 @@
 #include <stdio.h>
 
 void print_rainbow(float shift, float speed) {
-  int cnt = 0;
-  while (cnt < 100) {
+  for (int i = 0; i < 100; i++) {
     int r, g, b;
+    r = (std::sin(speed * i + 0 + shift) +1) * 127;
+            g = (std::sin(speed * i + ((2*M_PI)/3) + shift) +1) * 127;
+            b = (std::sin(speed * i + ((4*M_PI)/3)  + shift) +1) * 127;
 
-    r = std::sin(zoom * cnt + 0 + shift) * 255;
-    g = std::sin(zoom * cnt + 2 + shift) * 255;
-    b = std::sin(zoom * cnt + 4 + shift) * 255;
-    cnt++;
-
-    // printf("r:%4d, g:%4d, b:%4d",r,g,b);
-    printf("\033[48;2;%d;%d;%d m  \033[0m", (int)(r), (int)(g), (int)(b));
+     printf("r:%4d, g:%4d, b:%4d \n",r,g,b);
+   // printf("\033[48;2;%d;%d;%d m  \033[0m", (int)(r), (int)(g), (int)(b));
   }
 }
 int main() {
+  float shift = 0;
 
-  print_rainbow(1, 0.1);
-  printf("\n");
+  while (1) {
+    print_rainbow(shift, 0.1);
+  //  printf("\n");
+    shift += 0.0001;
+  }
 
   print_rainbow(2, 0.1);
 
